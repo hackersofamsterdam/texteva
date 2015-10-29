@@ -1,1 +1,1 @@
-web: bundle exec ruby ./eva.rb
+web: bundle exec ./eva.rb

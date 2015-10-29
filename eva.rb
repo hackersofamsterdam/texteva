@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require 'telegrammer'
 
 bot = Telegrammer::Bot.new '156127274:AAGBC_Jiwgb5RXai7xaTuAF3if_6ZLUUB4U'
