@@ -4,5 +4,5 @@ ruby '2.2.3'
 
 gem 'cuba'
 gem 'puma'
-gem 'json'
 gem 'telegrammer'
+gem 'TacTalk'
