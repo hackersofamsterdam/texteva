@@ -1,11 +1,33 @@
-#!/usr/bin/env ruby
+require 'cuba'
+require 'json'
 require 'telegrammer'
 
-bot = Telegrammer::Bot.new '156127274:AAGBC_Jiwgb5RXai7xaTuAF3if_6ZLUUB4U'
+token = ENV['TELEGRAM_TOKEN']
+bot = Telegrammer::Bot.new token
 
 bot.set_webhook('')
 
-bot.get_updates do |message|
-  puts "In chat #{message.chat.id}, @#{message.from.username} said: #{message.text}"
-  bot.send_message(chat_id: message.chat.id, text: "You said: #{message.text}")
+response = bot.set_webhook("#{ENV['APP_URL']}/webhook")
+
+puts "Webhook set to: #{ENV['APP_URL']}/webhook" if response.success
+
+Cuba.define do
+  on get do
+    on root do
+      res.write "http://telegram.me/#{bot.me.username}"
+    end
+  end
+
+  on post do
+    on 'webhook' do
+      on true do
+        post = JSON.parse req.body.read
+
+        bot.send_message chat_id: post['message']['chat']['id'],
+                         text: "You said: #{post['message']['text']}"
+
+        res.status = 200
+      end
+    end
+  end
 end

@@ -1,0 +1,3 @@
+require './eva'
+
+run Cuba

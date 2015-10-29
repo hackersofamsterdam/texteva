@@ -1,1 +1,1 @@
-web: bundle exec ./eva.rb
+web: puma -C ./puma.rb
