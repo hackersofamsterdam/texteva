@@ -6,6 +6,8 @@ Small Cuba app with Telegram webhook support
 
 - `git clone`
 - `bundle install`
+- `cp .env.dist .env`
+- edit `.env` to fit your settings
 - install [ngrok](https://ngrok.com/)
 - install [foreman](https://github.com/ddollar/foreman)
 
@@ -15,5 +17,5 @@ $ ngrok http 3000
 ```
 Then start the app:
 ```
-$ TELEGRAM_TOKEN=<your token> APP_URL=https://<random string>.ngrok.io foreman start
+$ foreman start
 ```
