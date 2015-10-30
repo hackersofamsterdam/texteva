@@ -8,23 +8,23 @@ response = bot.set_webhook("#{ENV['APP_URL']}/webhook/#{token}")
 
 puts "Webhook set to: #{ENV['APP_URL']}/webhook/#{token}" if response.success
 
-def flight_response
+def flight_response(_text)
   'flight info'
 end
 
-def food_response
+def food_response(_text)
   'food info'
 end
 
-def book_response
+def book_response(_text)
   'book info'
 end
 
-def buy_response
+def buy_response(_text)
   'buy info'
 end
 
-def unknown_response
+def unknown_response(_text)
   'unknown info'
 end
 
@@ -42,15 +42,15 @@ Cuba.define do
       unless update.message.text.empty?
         case update.message.text
         when '/flight' # add regex
-          response = flight_response
+          response = flight_response update.message.text
         when '/book' # add regex
-          response = book_response
+          response = book_response update.message.text
         when '/food' # add regex
-          response = food_response
+          response = food_response update.message.text
         when '/buy' # add regex
-          response = buy_response
+          response = buy_response update.message.text
         else
-          response = unknown_response
+          response = unknown_response update.message.text
         end
 
         bot.send_message chat_id: update.message.chat.id, text: response
