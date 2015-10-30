@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'bundler/setup'
+
 require 'cuba'
 require 'json'
 require 'telegrammer'
@@ -25,16 +28,20 @@ Cuba.define do
 
   on post do
     on "webhook/#{token}" do
-      on true do
-        update = Telegrammer::DataTypes::Update.new begin
-          MultiJson.load req.body.read
+      update = Telegrammer::DataTypes::Update.new MultiJson.load req.body.read
+
+      unless update.message.text == ''
+        begin
+          bot.send_message chat_id: update.message.chat.id,
+                           text: tac.ask(update.message.text)
+        rescue NoAnswerError
+          puts "Could not find matching answer for '#{update.message.text}'"
+          bot.send_message chat_id: update.message.chat.id,
+                           text: "I'm sorry, I don't understand that message."
         end
-
-        bot.send_message chat_id: update.message.chat.id,
-                         text: tac.ask(update.message.text)
-
-        res.status = 200
       end
+
+      res.status = 200
     end
   end
 end

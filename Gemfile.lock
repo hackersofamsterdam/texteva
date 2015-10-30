@@ -1,8 +1,7 @@
-GEM
-  remote: https://rubygems.org/
+GIT
+  remote: git@github.com:jeroenvisser101/tactalk.git
+  revision: 69e5591de06c304434df9ae00e83edffafc97f58
   specs:
-    RubyInline (3.12.4)
-      ZenTest (~> 4.3)
     TacTalk (0.1.1)
       fuzzy_tools
       pragmatic_segmenter
@@ -11,6 +10,12 @@ GEM
       sanitize
       tokenizer
       words_counted
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    RubyInline (3.12.4)
+      ZenTest (~> 4.3)
     ZenTest (4.11.0)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -60,7 +65,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  TacTalk
+  TacTalk!
   cuba
   puma
   telegrammer
