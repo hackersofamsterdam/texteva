@@ -1,11 +1,3 @@
-require 'rubygems'
-require 'bundler/setup'
-
-require 'cuba'
-require 'json'
-require 'telegrammer'
-require 'tactalk'
-
 token = ENV['TELEGRAM_TOKEN']
 
 bot = Telegrammer::Bot.new token
