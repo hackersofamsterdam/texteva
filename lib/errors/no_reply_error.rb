@@ -1,0 +1,2 @@
+class NoReplyError < StandardError
+end
