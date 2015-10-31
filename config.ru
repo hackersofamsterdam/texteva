@@ -5,7 +5,7 @@ require 'bundler/setup'
 Bundler.require
 
 # Include app
-require './eva'
+require_relative 'app'
 
 # Run app
 run Cuba
