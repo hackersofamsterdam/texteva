@@ -18,7 +18,7 @@ class BolLookupCommand < Command
   def invoke!
     response = BolClient.new.catalog match[:product]
     json = MultiJson.load response.body
-    fridge = Fridge.find_by_chat_id(message.chat.id) || Fridge.new(chat_id: message.chat.id)
+    fridge = Fridge.find_by_token(message.chat.id) || Fridge.new(chat_id: message.chat.id)
 
     fridge.update contents: json['products']
 

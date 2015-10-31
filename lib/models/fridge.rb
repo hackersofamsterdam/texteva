@@ -1,9 +1,9 @@
 # Fridge
 class Fridge < Ohm::Model
-  attribute :chat_id
+  attribute :token
   attribute :contents_data
 
-  index :chat_id
+  index :token
 
   def contents=(data)
     self.content_data = MultiJson.dump data
@@ -13,7 +13,7 @@ class Fridge < Ohm::Model
     MultiJson.load content_data
   end
 
-  def find_by_chat_id(chat_id)
-    find(chat_id: chat_id).first
+  def find_by_token(token)
+    find(token: token).first
   end
 end
