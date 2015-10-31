@@ -21,7 +21,7 @@ update_dispatcher = UpdateDispatcher.new(command_loader)
 Cuba.define do
   on get do
     on root do
-      res.write "<a href=\"http://telegram.me/#{bot.me.username}\">Eva</a>"
+      res.write "<a href=\"http://telegram.me/#{bot.me.username}\">#{bot.me.first_name}</a>"
     end
   end
 
