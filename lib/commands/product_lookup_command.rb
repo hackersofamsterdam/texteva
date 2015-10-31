@@ -8,7 +8,7 @@ class ProductLookupCommand < Command
   end
 
   def syntax
-    '/product <search query>'
+    '/p <search query>'
   end
 
   def regex

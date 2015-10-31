@@ -7,7 +7,7 @@ class ProductBuyCommand < Command
   end
 
   def syntax
-    '/pbuy <search query>'
+    '/pb <search query>'
   end
 
   def regex
