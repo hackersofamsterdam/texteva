@@ -6,14 +6,18 @@ class Fridge < Ohm::Model
   index :token
 
   def contents=(data)
-    self.content_data = MultiJson.dump data
+    self.contents_data = MultiJson.dump data
   end
 
   def contents
-    MultiJson.load content_data
+    MultiJson.load contents_data
   end
 
-  def find_by_token(token)
+  def self.find_by_token(token)
     find(token: token).first
+  end
+
+  def self.find_or_initialize(query)
+    find(query).first || self.class.new(query)
   end
 end

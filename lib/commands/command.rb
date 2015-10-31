@@ -19,6 +19,10 @@ class Command
     end
   end
 
+  def chat_id
+    @update.message.chat.id
+  end
+
   def match
     regex.match(command)
   end
@@ -29,6 +33,8 @@ class Command
   alias_method :command, :message
 
   def reply(message)
-    @bot.send_message chat_id: @update.message.chat.id, text: message, parse_mode: 'Markdown'
+    @bot.send_message chat_id: chat_id,
+                      text: message,
+                      parse_mode: 'Markdown'
   end
 end
