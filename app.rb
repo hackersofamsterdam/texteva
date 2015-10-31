@@ -18,6 +18,9 @@ command_loader = CommandLoader.new(bot)
 # Initialize the dispatcher
 update_dispatcher = UpdateDispatcher.new(command_loader)
 
+# Load Ohm
+Ohm.redis = Redic.new(ENV['REDIS_URL'] || 'redis://127.0.0.1:6379')
+
 Cuba.define do
   on get do
     on root do
