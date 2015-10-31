@@ -11,7 +11,7 @@ class BolClient
   def catalog(q)
     @options[:query].merge! q: q,
                             offset: 0,
-                            limit: 1,
+                            limit: 3,
                             dataoutput: 'products,categories'
 
     self.class.get('/catalog/v4/search', @options)
