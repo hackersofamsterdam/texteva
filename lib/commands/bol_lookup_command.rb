@@ -1,9 +1,7 @@
-require './lib/bol_api'
+require './lib/clients/bol_client'
 
 # Bol.com Lookup Command
 class BolLookupCommand < Command
-  include BolAPI
-
   def help
     'Searches for products in the Bol.com catalog.'
   end
@@ -17,13 +15,7 @@ class BolLookupCommand < Command
   end
 
   def invoke!
-    options = api_options
-    options[:query].merge!(q: match[:product],
-                           offset: 0,
-                           limit: 1,
-                           dataoutput: 'products,categories')
-
-    response = self.class.get('/catalog/v4/search', options)
+    response = BolClient.new.catalog match[:product]
 
     json = MultiJson.load response.body
 
