@@ -1,11 +1,13 @@
 token = ENV['TELEGRAM_TOKEN']
 
-bot = Telegrammer::Bot.new token
+# Create bot
+bot = Telegrammer::Bot.new(token)
 
+# Delete existing webhooks
 bot.set_webhook('')
 
+# Set webhook
 response = bot.set_webhook("#{ENV['APP_URL']}/webhook/#{token}")
-
 puts "Webhook set to: #{ENV['APP_URL']}/webhook/#{token}" if response.success
 
 def flight_response(_text)
@@ -39,18 +41,18 @@ Cuba.define do
     on "webhook/#{token}" do
       update = Telegrammer::DataTypes::Update.new MultiJson.load(req.body.read)
 
-      unless update.message.text.empty?
+      unless update.message.text.nil? or update.message.text.empty?
         case update.message.text
-        when '/flight' # add regex
-          response = flight_response update.message.text
-        when '/book' # add regex
-          response = book_response update.message.text
-        when '/food' # add regex
-          response = food_response update.message.text
-        when '/buy' # add regex
-          response = buy_response update.message.text
-        else
-          response = unknown_response update.message.text
+          when '/flight' # add regex
+            response = flight_response update.message.text
+          when '/book' # add regex
+            response = book_response update.message.text
+          when '/food' # add regex
+            response = food_response update.message.text
+          when '/buy' # add regex
+            response = buy_response update.message.text
+          else
+            response = unknown_response update.message.text
         end
 
         bot.send_message chat_id: update.message.chat.id, text: response
